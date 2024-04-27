@@ -11,7 +11,6 @@ Leaving function: DIGIT Success
 Leaving function: VALUE Success
 Entering function: REGISTER
 Leaving function: REGISTER Success
-Leaving function: COMMANDS Success
 Entering function: COMMANDS
 Entering function: COMMAND
 Leaving function: COMMAND Success
@@ -26,5 +25,4 @@ Leaving function: DIGIT Success
 Leaving function: VALUE Success
 Entering function: REGISTER
 Leaving function: REGISTER Success
-Leaving function: COMMANDS Success
 Leaving function: START Success

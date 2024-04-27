@@ -33,6 +33,8 @@ public class Parser {
             System.exit(0);
         } // end catch
         
+        //call the Start grammar rule
+
         START(inStream, outStream);
 
         inStream.close();
@@ -105,25 +107,22 @@ public class Parser {
 
             if (REGISTER(outStream, registerValueLine) == 1) {
                 System.out.println("Register Good!"); 
-                
-                
-                //if it is a register, we need case for:
-                // 1.    comma, register, ]
-                // 2.    ], null               DONE
+
+                //optional part of the grammar
 
                 try {
                     String nextLine = getNextLine(inStream);
                     if (nextLine != null && nextLine.equals(",")) {
-                        System.out.println("comma Good!");
+                        System.out.println("optional comma Good!");
                     } 
-                    else if(nextLine != null && nextLine.equals("]") && (command.equals("sq") || command.equals("rt"))){
+                    else if(nextLine != null && nextLine.equals("]")){
                         System.out.println("bracket detected leaving early!");
                         System.out.println("Leaving function: COMMANDS Success");
                         outStream.println("Leaving function: COMMANDS Success");
                         return true;
                     }
                     else {
-                        System.out.println("no comma or bracket (or bracket with wrong command)... nothing there");
+                        System.out.println("no comma or bracket... nothing there");
                         System.out.println("Leaving function: COMMANDS Failure");
                         outStream.println("Leaving function: COMMANDS Failure");
                         return false;
@@ -135,25 +134,23 @@ public class Parser {
                     return false;
                 }
 
-                //registere check
-                if (REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
-                    //end bracket check
-                    System.out.println("Register Good! almost there!");
+                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
+                    System.out.println("Register Good!");
+
                     try {
                         String nextLine = getNextLine(inStream);
-                        if(nextLine != null && nextLine.equals("]") && (command.equals("sub") || command.equals("st") || command.equals("add"))){
-                            System.out.println("Leaving function: COMMANDS Success");
-                            outStream.println("Leaving function: COMMANDS Success");
+                        if (nextLine != null && nextLine.equals("]")) {
+                            System.out.println("required bracket Good!");
                             return true;
-                        }
+                        } 
                         else {
-                            System.out.println("no bracket");
+                            System.out.println("no bracket... nothing there");
                             System.out.println("Leaving function: COMMANDS Failure");
                             outStream.println("Leaving function: COMMANDS Failure");
                             return false;
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("no bracket... nothing there");
+                        System.out.println("no comma or bracket... nothing there");
                         System.out.println("Leaving function: COMMANDS Failure");
                         outStream.println("Leaving function: COMMANDS Failure");
                         return false;
@@ -169,79 +166,61 @@ public class Parser {
             else if (VALUE(outStream, registerValueLine) == 2) {
                 System.out.println("Value Good!");
 
-                //if it is a value, we need case for:
-                // 1. comma, register
-                // This is the only case for a value, as a value cannot be followed by another value
-                // LD
-
-
-                if (!command.equals("ld")){
-                    System.out.println("NOT VALID COMMAND FOR VALUE/REG PAIR");
+                //optional part of the grammar
+                
+                try {
+                    String nextLine = getNextLine(inStream);
+                    if (nextLine != null && nextLine.equals(",")) {
+                        System.out.println("optional comma Good!");
+                    } 
+                    else if(nextLine != null && nextLine.equals("]")){
+                        System.out.println("bracket detected leaving early!");
+                        System.out.println("Leaving function: COMMANDS Success");
+                        outStream.println("Leaving function: COMMANDS Success");
+                        return true;
+                    }
+                    else {
+                        System.out.println("no comma or bracket... nothing there");
+                        System.out.println("Leaving function: COMMANDS Failure");
+                        outStream.println("Leaving function: COMMANDS Failure");
+                        return false;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("no comma or bracket... nothing there");
                     System.out.println("Leaving function: COMMANDS Failure");
                     outStream.println("Leaving function: COMMANDS Failure");
                     return false;
                 }
 
-                //optional part of the grammar
-                Boolean isComma = false;
-                try {
-                    String nextLine = getNextLine(inStream);
-                    if (nextLine != null && nextLine.equals(",")) {
-                        System.out.println("comma Good!");
-                        isComma = true;
-                    } 
-                    else {
-                        System.out.println("comma bad");
-                        isComma = false;
-                    }
-                } catch (NullPointerException e) {
-                    System.out.println("no comma, nothing there");
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
-                }
+                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
+                    System.out.println("Register Good!");
 
-                if (isComma) {
-                    System.out.println("Comma detected!");
-
-                    registerValueLine = toLower(getNextLine(inStream));
-
-                    if (REGISTER(outStream, registerValueLine) == 1) {
-                        System.out.println("Register Good!");
-                        try {
-                            String nextLine = getNextLine(inStream);
-                            if (nextLine != null && nextLine.equals("]")) {
-                                System.out.println("Bracket Good!");
-                                System.out.println("Leaving function: COMMANDS Success");
-                                outStream.println("Leaving function: COMMANDS Success");
-                                return true;
-                            } 
-                            else {
-                                System.out.println("Bracket bad");
-                                System.out.println("Leaving function: COMMANDS Failure");
-                                outStream.println("Leaving function: COMMANDS Failure");
-                                return false;
-                            }
-                        } catch (NullPointerException e) {
-                            System.out.println("no bracket, nothing there");
+                    try {
+                        String nextLine = getNextLine(inStream);
+                        if (nextLine != null && nextLine.equals("]")) {
+                            System.out.println("required bracket Good!");
+                            return true;
+                        } 
+                        else {
+                            System.out.println("no bracket... nothing there");
                             System.out.println("Leaving function: COMMANDS Failure");
                             outStream.println("Leaving function: COMMANDS Failure");
                             return false;
                         }
-
-                    }
-                    else {
+                    } catch (NullPointerException e) {
+                        System.out.println("no comma or bracket... nothing there");
                         System.out.println("Leaving function: COMMANDS Failure");
                         outStream.println("Leaving function: COMMANDS Failure");
                         return false;
                     }
                 }
-                if (!isComma) {
-                    System.out.println("Comma NOT detected!");
+                else {
                     System.out.println("Leaving function: COMMANDS Failure");
                     outStream.println("Leaving function: COMMANDS Failure");
                     return false;
-
                 }
+
+                
 
             }
             else {
@@ -252,13 +231,12 @@ public class Parser {
             
             
 
-        } else {
-            System.out.println("Leaving function: COMMANDS Failure");
-            outStream.println("Leaving function: COMMANDS Failure");
-            return false;
         }
 
-        return true;
+        System.out.println("Leaving function: COMMANDS Failure");
+        outStream.println("Leaving function: COMMANDS Failure");
+        return false;
+        
     }
 
     public static boolean COMMAND(Scanner inStream, PrintWriter outStream, String command) {
@@ -287,6 +265,8 @@ public class Parser {
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
         System.out.println("Entering function: REGISTER");
         outStream.println("Entering function: REGISTER");
+
+        System.out.println("Register Value Line: " + registerValueLine);
 
         if (registerValueLine.equals("a") || registerValueLine.equals("b") || registerValueLine.equals("c") || registerValueLine.equals("d") || registerValueLine.equals("e") || registerValueLine.equals("f")) {
             //System.out.println("Command Good!");
