@@ -81,40 +81,6 @@ public class Parser {
         return true;
     }
 
-    public static boolean COMMAND(Scanner inStream, PrintWriter outStream, int StartCounter) {
-        System.out.println("Entering function: COMMAND");
-        outStream.println("Entering function: COMMAND");
-
-        String command = getNextLine(inStream);
-
-        if(command == null && StartCounter == 0){ //SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW
-            //for the first command, if there is no command, return true
-            System.out.println("Leaving function: COMMAND Success");
-            outStream.println("Leaving function: COMMAND Success");
-            return true;
-        } // SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW
-        
-        if (command == null) {
-            System.out.println("Leaving function: COMMAND Failure");
-            outStream.println("Leaving function: COMMAND Failure");
-            return false;
-        }
-
-        command = toLower(command);
-
-        if (command.equals("st") || command.equals("ld") || command.equals("sub") || command.equals("add") || command.equals("sq") || command.equals("rt")) {
-            //System.out.println("Command Good!");
-            //outStream.println("Command Good!");
-            System.out.println("Leaving function: COMMAND Success");
-            outStream.println("Leaving function: COMMAND Success");
-            return true;
-        } else {
-            System.out.println("Leaving function: COMMAND Failure");
-            outStream.println("Leaving function: COMMAND Failure");
-            return false;
-        }
-    }
-
     public static String toLower(String input) {
         //Per instructions: "The language is not case sensitive." All input is converted to lower case to conform to logic of parser.
         return input.toLowerCase();
