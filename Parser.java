@@ -120,14 +120,14 @@ public class Parser {
                         System.out.println("comma Good!");
                         isComma = true;
                     } 
-                    else if(nextLine != null && nextLine.equals("]")){
+                    else if(nextLine != null && nextLine.equals("]") && (command.equals("sq") || command.equals("rt"))){
                         System.out.println("bracket detected leaving early!");
                         System.out.println("Leaving function: COMMANDS Success");
                         outStream.println("Leaving function: COMMANDS Success");
                         return true;
                     }
                     else {
-                        System.out.println("no comma or bracket... nothing there");
+                        System.out.println("no comma or bracket (or bracket with wrong command)... nothing there");
                         System.out.println("Leaving function: COMMANDS Failure");
                         outStream.println("Leaving function: COMMANDS Failure");
                         return false;
@@ -145,7 +145,7 @@ public class Parser {
                     System.out.println("Register Good! almost there!");
                     try {
                         String nextLine = getNextLine(inStream);
-                        if(nextLine != null && nextLine.equals("]")){
+                        if(nextLine != null && nextLine.equals("]") && (command.equals("sub") || command.equals("st") || command.equals("add"))){
                             System.out.println("Leaving function: COMMANDS Success");
                             outStream.println("Leaving function: COMMANDS Success");
                             return true;
@@ -178,6 +178,15 @@ public class Parser {
                 //if it is a value, we need case for:
                 // 1. comma, register
                 // This is the only case for a value, as a value cannot be followed by another value
+                // LD
+
+
+                if (!command.equals("ld")){
+                    System.out.println("NOT VALID COMMAND FOR VALUE/REG PAIR");
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                    return false;
+                }
 
                 //optional part of the grammar
                 Boolean isComma = false;
@@ -284,8 +293,6 @@ public class Parser {
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
         System.out.println("Entering function: REGISTER");
         outStream.println("Entering function: REGISTER");
-
-        System.out.println("Register Value Line: " + registerValueLine);
 
         if (registerValueLine.equals("a") || registerValueLine.equals("b") || registerValueLine.equals("c") || registerValueLine.equals("d") || registerValueLine.equals("e") || registerValueLine.equals("f")) {
             //System.out.println("Command Good!");
