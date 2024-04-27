@@ -101,12 +101,16 @@ public class Parser {
 
             if (REGISTER(outStream, registerValueLine) == 1) {
                 RegValCheck = 1;
-                System.out.println("Register Good!");                
+                System.out.println("Register Good!");  
+                
+                //optional part of the grammar
 
             }
             else if (VALUE(outStream, registerValueLine) == 2) {
                 RegValCheck = 2;
                 System.out.println("Value Good!");
+
+                //optional part of the grammar
 
             }
             else {
