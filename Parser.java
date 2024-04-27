@@ -75,8 +75,6 @@ public class Parser {
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
-        int RegValCheck; // 1 equals register, 2 equals value
-
         if (COMMAND(inStream, outStream, StartCounter)) {
             try {
                 String nextLine = getNextLine(inStream);
@@ -100,28 +98,138 @@ public class Parser {
             String registerValueLine = toLower(getNextLine(inStream));
 
             if (REGISTER(outStream, registerValueLine) == 1) {
-                RegValCheck = 1;
                 System.out.println("Register Good!"); 
                 
                 
                 //if it is a register, we need case for:
-                // 1. comma, register
-                // 2. comma, value
-                // 3. null, null
-                
-                //optional part of the grammar
+                // 1.    comma, register, ]
+                // 2.    ], null               DONE
+
+                Boolean isComma = false;
+                try {
+                    String nextLine = getNextLine(inStream);
+                    if (nextLine != null && nextLine.equals(",")) {
+                        System.out.println("comma Good!");
+                        isComma = true;
+                    } 
+                    else if(nextLine != null && nextLine.equals("]")){
+                        System.out.println("Leaving function: COMMANDS Success");
+                        outStream.println("Leaving function: COMMANDS Success");
+                        return true;
+                    }
+                    else {
+                        System.out.println("no comma or bracket... nothing there");
+                        System.out.println("Leaving function: COMMANDS Failure");
+                        outStream.println("Leaving function: COMMANDS Failure");
+                        return false;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("no comma or bracket... nothing there");
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                    return false;
+                }
+
+                //registere check
+                if (REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
+                    //end bracket check
+                    System.out.println("Register Good! almost there!");
+                    try {
+                        String nextLine = getNextLine(inStream);
+                        if(nextLine != null && nextLine.equals("]")){
+                            System.out.println("Leaving function: COMMANDS Success");
+                            outStream.println("Leaving function: COMMANDS Success");
+                            return true;
+                        }
+                        else {
+                            System.out.println("no bracket");
+                            System.out.println("Leaving function: COMMANDS Failure");
+                            outStream.println("Leaving function: COMMANDS Failure");
+                            return false;
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("no bracket... nothing there");
+                        System.out.println("Leaving function: COMMANDS Failure");
+                        outStream.println("Leaving function: COMMANDS Failure");
+                        return false;
+                    }
+                }
+                else {
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                    return false;
+                }
+
 
 
             }
             else if (VALUE(outStream, registerValueLine) == 2) {
-                RegValCheck = 2;
                 System.out.println("Value Good!");
 
                 //if it is a value, we need case for:
-                // 1. value, comma, register
+                // 1. comma, register
                 // This is the only case for a value, as a value cannot be followed by another value
 
                 //optional part of the grammar
+                Boolean isComma = false;
+                try {
+                    String nextLine = getNextLine(inStream);
+                    if (nextLine != null && nextLine.equals(",")) {
+                        System.out.println("comma Good!");
+                        isComma = true;
+                    } 
+                    else {
+                        System.out.println("comma bad");
+                        isComma = false;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("no comma, nothing there");
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                }
+
+                if (isComma) {
+                    System.out.println("Comma detected!");
+
+                    registerValueLine = toLower(getNextLine(inStream));
+
+                    if (REGISTER(outStream, registerValueLine) == 1) {
+                        System.out.println("Register Good!");
+                        try {
+                            String nextLine = getNextLine(inStream);
+                            if (nextLine != null && nextLine.equals("]")) {
+                                System.out.println("Bracket Good!");
+                                System.out.println("Leaving function: COMMANDS Success");
+                                outStream.println("Leaving function: COMMANDS Success");
+                                return true;
+                            } 
+                            else {
+                                System.out.println("Bracket bad");
+                                System.out.println("Leaving function: COMMANDS Failure");
+                                outStream.println("Leaving function: COMMANDS Failure");
+                                return false;
+                            }
+                        } catch (NullPointerException e) {
+                            System.out.println("no bracket, nothing there");
+                            System.out.println("Leaving function: COMMANDS Failure");
+                            outStream.println("Leaving function: COMMANDS Failure");
+                            return false;
+                        }
+
+                    }
+                    else {
+                        System.out.println("Leaving function: COMMANDS Failure");
+                        outStream.println("Leaving function: COMMANDS Failure");
+                        return false;
+                    }
+                }
+                if (!isComma) {
+                    System.out.println("Comma NOT detected!");
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                    return false;
+
+                }
 
             }
             else {
@@ -220,7 +328,6 @@ public class Parser {
             digitList.add(registerValueLine.substring(i, i+1));
         }
 
-
         if (DIGIT(digitList.get(0), outStream, digitCounter)) {
             digitCounter++;
             for (int i = 1; i < digitList.size(); i++) {
@@ -234,13 +341,12 @@ public class Parser {
             }
             
         }
+
         else {
             System.out.println("Leaving function: DIGITS Failure");
             outStream.println("Leaving function: DIGITS Failure");
             return false;
         }
-
-        
 
         return true;
     }
@@ -277,7 +383,6 @@ public class Parser {
         }
 
     }
-
 
     public static String toLower(String input) {
         //Per instructions: "The language is not case sensitive." All input is converted to lower case to conform to logic of parser.
