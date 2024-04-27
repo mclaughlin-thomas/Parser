@@ -3,7 +3,27 @@ Entering function: COMMANDS
 Entering function: COMMAND
 Leaving function: COMMAND Success
 Entering function: REGISTER
+Leaving function: REGISTER Failure
+Entering function: VALUE
+Entering function: DIGITS
+Entering function: DIGIT
+Leaving function: DIGIT Success
+Leaving function: VALUE Success
+Entering function: REGISTER
 Leaving function: REGISTER Success
+Leaving function: COMMANDS Success
+Entering function: COMMANDS
+Entering function: COMMAND
+Leaving function: COMMAND Success
+Entering function: REGISTER
+Leaving function: REGISTER Failure
+Entering function: VALUE
+Entering function: DIGITS
+Entering function: DIGIT
+Leaving function: DIGIT Success
+Entering function: DIGIT
+Leaving function: DIGIT Success
+Leaving function: VALUE Success
 Entering function: REGISTER
 Leaving function: REGISTER Success
 Leaving function: COMMANDS Success

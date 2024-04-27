@@ -113,12 +113,10 @@ public class Parser {
                 // 1.    comma, register, ]
                 // 2.    ], null               DONE
 
-                Boolean isComma = false;
                 try {
                     String nextLine = getNextLine(inStream);
                     if (nextLine != null && nextLine.equals(",")) {
                         System.out.println("comma Good!");
-                        isComma = true;
                     } 
                     else if(nextLine != null && nextLine.equals("]") && (command.equals("sq") || command.equals("rt"))){
                         System.out.println("bracket detected leaving early!");
@@ -168,8 +166,6 @@ public class Parser {
                     outStream.println("Leaving function: COMMANDS Failure");
                     return false;
                 }
-
-
 
             }
             else if (VALUE(outStream, registerValueLine) == 2) {
