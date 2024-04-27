@@ -1,2 +1,0 @@
-Entering function: START
-Leaving function: START Success

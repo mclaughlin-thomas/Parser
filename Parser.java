@@ -56,15 +56,12 @@ public class Parser {
 
         System.out.println("Entering function: START");
         outStream.println("Entering function: START");
-        int StartCounter = 0;
 
         while (inStream.hasNextLine()) {
             // Read the next line
 
-            if (COMMANDS(inStream, outStream, StartCounter)) {
-                System.out.println("Leaving function: START Success");
-                outStream.println("Leaving function: START Success");
-                return true;
+            if (COMMANDS(inStream, outStream)) {
+                //return true;
             }
             else {
                 System.out.println("Leaving function: START Failure");
@@ -80,11 +77,11 @@ public class Parser {
 
     }
 
-    public static boolean COMMANDS(Scanner inStream, PrintWriter outStream, int StartCounter) {
+    public static boolean COMMANDS(Scanner inStream, PrintWriter outStream) {
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
-        if (COMMAND(inStream, outStream, StartCounter)) {
+        if (COMMAND(inStream, outStream)) {
             try {
                 String nextLine = getNextLine(inStream);
                 if (nextLine != null && nextLine.equals("[")) {
@@ -122,6 +119,7 @@ public class Parser {
                         isComma = true;
                     } 
                     else if(nextLine != null && nextLine.equals("]")){
+                        System.out.println("bracket detected leaving early!");
                         System.out.println("Leaving function: COMMANDS Success");
                         outStream.println("Leaving function: COMMANDS Success");
                         return true;
@@ -258,18 +256,12 @@ public class Parser {
         return true;
     }
 
-    public static boolean COMMAND(Scanner inStream, PrintWriter outStream, int StartCounter) {
+    public static boolean COMMAND(Scanner inStream, PrintWriter outStream) {
         System.out.println("Entering function: COMMAND");
         outStream.println("Entering function: COMMAND");
 
         String command = getNextLine(inStream);
 
-        if(command == null && StartCounter == 0){
-            //for the first command, if there is no command, return true
-            System.out.println("Leaving function: START Success");
-            outStream.println("Leaving function: START Success");
-            return true;
-        } // SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW
         if (command == null) {
             System.out.println("Leaving function: COMMAND Failure");
             outStream.println("Leaving function: COMMAND Failure");
@@ -296,6 +288,8 @@ public class Parser {
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
         System.out.println("Entering function: REGISTER");
         outStream.println("Entering function: REGISTER");
+
+        System.out.println("Register Value Line: " + registerValueLine);
 
         if (registerValueLine.equals("a") || registerValueLine.equals("b") || registerValueLine.equals("c") || registerValueLine.equals("d") || registerValueLine.equals("e") || registerValueLine.equals("f")) {
             //System.out.println("Command Good!");
