@@ -101,11 +101,7 @@ public class Parser {
 
             if (REGISTER(outStream, registerValueLine) == 1) {
                 RegValCheck = 1;
-                System.out.println("Register Good!");
-
-                
-                
-                
+                System.out.println("Register Good!");                
 
             }
             else if (VALUE(outStream, registerValueLine) == 2) {
