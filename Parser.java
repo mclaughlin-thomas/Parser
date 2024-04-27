@@ -51,6 +51,9 @@ public class Parser {
 
 
     public static boolean START(Scanner inStream,PrintWriter outStream) {
+
+        //loop will be here
+
         System.out.println("Entering function: START");
         outStream.println("Entering function: START");
         int StartCounter = 0;
@@ -75,32 +78,48 @@ public class Parser {
         int RegValCheck; // 1 equals register, 2 equals value
 
         if (COMMAND(inStream, outStream, StartCounter)) {
-            if (getNextLine(inStream).equals("[")) {
-
-                
-                String registerValueLine = toLower(getNextLine(inStream));
-
-                if (REGISTER(outStream, registerValueLine) == 1) {
-                    RegValCheck = 1;
-                    System.out.println("Register Good!");
-
-                }
-                else if (VALUE(outStream, registerValueLine) == 2) {
-                    RegValCheck = 2;
-                    System.out.println("Value Good!");
-
-                }
+            try {
+                String nextLine = getNextLine(inStream);
+                if (nextLine != null && nextLine.equals("[")) {
+                    System.out.println("Bracket Good!");
+                } 
                 else {
+                    System.out.println("bracket bad");
                     System.out.println("Leaving function: COMMANDS Failure");
                     outStream.println("Leaving function: COMMANDS Failure");
                     return false;
                 }
+            } catch (NullPointerException e) {
+                System.out.println("bracket bad");
+                System.out.println("Leaving function: COMMANDS Failure");
+                outStream.println("Leaving function: COMMANDS Failure");
+                return false;
+            }
+
+                
+            String registerValueLine = toLower(getNextLine(inStream));
+
+            if (REGISTER(outStream, registerValueLine) == 1) {
+                RegValCheck = 1;
+                System.out.println("Register Good!");
+
+                
+                
+                
+
+            }
+            else if (VALUE(outStream, registerValueLine) == 2) {
+                RegValCheck = 2;
+                System.out.println("Value Good!");
+
             }
             else {
                 System.out.println("Leaving function: COMMANDS Failure");
                 outStream.println("Leaving function: COMMANDS Failure");
                 return false;
             }
+            
+            
 
         } else {
             System.out.println("Leaving function: COMMANDS Failure");
