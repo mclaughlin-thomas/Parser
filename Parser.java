@@ -101,8 +101,10 @@ public class Parser {
         command = toLower(command);
 
         if (command.equals("st") || command.equals("ld") || command.equals("sub") || command.equals("add") || command.equals("sq") || command.equals("rt")) {
-            System.out.println("Command Good!");
-            outStream.println("Command Good!");
+            //System.out.println("Command Good!");
+            //outStream.println("Command Good!");
+            System.out.println("Leaving function: COMMAND Success");
+            outStream.println("Leaving function: COMMAND Success");
             return true;
         } else {
             System.out.println("Leaving function: COMMAND Failure");
