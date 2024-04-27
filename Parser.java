@@ -58,16 +58,25 @@ public class Parser {
         outStream.println("Entering function: START");
         int StartCounter = 0;
 
-        if (COMMANDS(inStream, outStream, StartCounter)) {
-            System.out.println("Leaving function: START Success");
-            outStream.println("Leaving function: START Success");
-            return true;
-        } else {
-            System.out.println("Leaving function: START Failure");
-            outStream.println("Leaving function: START Failure");
-            System.exit(0);
-            return false;
+        while (inStream.hasNextLine()) {
+            // Read the next line
+
+            if (COMMANDS(inStream, outStream, StartCounter)) {
+                System.out.println("Leaving function: START Success");
+                outStream.println("Leaving function: START Success");
+                return true;
+            }
+            else {
+                System.out.println("Leaving function: START Failure");
+                outStream.println("Leaving function: START Failure");
+                System.exit(0);
+                return false;
+            }
         }
+
+        System.out.println("Leaving function: START Success");
+        outStream.println("Leaving function: START Success");
+        return true;
 
     }
 
