@@ -30,6 +30,9 @@ public class Parser {
             System.out.println("error opening the file Prog4TMout.txt.");
             System.exit(0);
         } // end catch
+
+        inStream.close();
+        outStream.close();
     }
 
     public static boolean START() {
