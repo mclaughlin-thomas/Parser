@@ -1,5 +1,0 @@
-Entering function: START
-Entering function: COMMANDS
-Entering function: COMMAND
-Leaving function: START Success
-Leaving function: START Success

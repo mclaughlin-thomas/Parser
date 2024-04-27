@@ -60,6 +60,7 @@ public class Parser {
         } else {
             System.out.println("Leaving function: START Failure");
             outStream.println("Leaving function: START Failure");
+            System.exit(0);
             return false;
         }
 
@@ -69,12 +70,40 @@ public class Parser {
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
+        int RegValCheck; // 1 equals register, 2 equals value
+
         if (COMMAND(inStream, outStream, StartCounter)) {
-            System.out.println("Command Good!");
+            if (getNextLine(inStream).equals("[")) {
+
+                
+                String registerValueLine = toLower(getNextLine(inStream));
+
+                if (REGISTER(outStream, registerValueLine) == 1) {
+                    RegValCheck = 1;
+                    System.out.println("Register Good!");
+
+                }
+                else if (VALUE(outStream, registerValueLine) == 2) {
+                    RegValCheck = 2;
+                }
+                else {
+                    System.out.println("Leaving function: COMMANDS Failure");
+                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.exit(0);
+                    return false;
+                }
+            }
+            else {
+                System.out.println("Leaving function: COMMANDS Failure");
+                outStream.println("Leaving function: COMMANDS Failure");
+                System.exit(0);
+                return false;
+            }
 
         } else {
             System.out.println("Leaving function: COMMANDS Failure");
             outStream.println("Leaving function: COMMANDS Failure");
+            System.exit(0);
             return false;
         }
 
@@ -91,10 +120,12 @@ public class Parser {
             //for the first command, if there is no command, return true
             System.out.println("Leaving function: START Success");
             outStream.println("Leaving function: START Success");
+            return true;
         } // SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW SHOULD BE IN START SOMEHOW
         if (command == null) {
             System.out.println("Leaving function: COMMAND Failure");
             outStream.println("Leaving function: COMMAND Failure");
+            System.exit(0);
             return false;
         }
 
@@ -109,9 +140,84 @@ public class Parser {
         } else {
             System.out.println("Leaving function: COMMAND Failure");
             outStream.println("Leaving function: COMMAND Failure");
+            System.exit(0);
             return false;
         }
     }
+
+    public static int REGISTER(PrintWriter outStream, String registerValueLine) {
+        System.out.println("Entering function: REGISTER");
+        outStream.println("Entering function: REGISTER");
+
+        if (registerValueLine.equals("a") || registerValueLine.equals("b") || registerValueLine.equals("c") || registerValueLine.equals("d") || registerValueLine.equals("e") || registerValueLine.equals("f")) {
+            //System.out.println("Command Good!");
+            //outStream.println("Command Good!");
+            System.out.println("Leaving function: REGISTER Success");
+            outStream.println("Leaving function: REGISTER Success");
+            return 1;
+        }
+        else {
+            System.out.println("Leaving function: REGISTER Failure");
+            outStream.println("Leaving function: REGISTER Failure");
+            System.exit(0);
+            return 0;
+        }
+    }
+
+    public static int VALUE(PrintWriter outStream, String registerValueLine){
+        System.out.println("Entering function: VALUE");
+        outStream.println("Entering function: VALUE");
+        
+        if (DIGITS(registerValueLine, outStream)) {
+            System.out.println("Leaving function: VALUE Success");
+            outStream.println("Leaving function: VALUE Success");
+            return 2;
+        } else {
+            System.out.println("Leaving function: VALUE Failure");
+            outStream.println("Leaving function: VALUE Failure");
+            System.exit(0);
+            return 0;
+        }
+    }
+
+    public static boolean DIGITS(String registerValueLine, PrintWriter outStream) {
+        System.out.println("Entering function: DIGITS");
+        outStream.println("Entering function: DIGITS");
+
+        int digitCounter = 0;
+
+        if (DIGIT(registerValueLine, outStream, digitCounter)) {
+            
+        }
+        else {
+            System.out.println("Leaving function: DIGITS Failure");
+            outStream.println("Leaving function: DIGITS Failure");
+            System.exit(0);
+            return false;
+        }
+
+        
+
+        return true;
+    }
+
+    public static boolean DIGIT(String registerValueLine,PrintWriter outStream, int digitCounter) {
+        System.out.println("Entering function: DIGIT");
+        outStream.println("Entering function: DIGIT");
+
+        if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9")){
+            System.out.println("Leaving function: DIGIT Success");
+            outStream.println("Leaving function: DIGIT Success");
+            return true;
+        }
+        else {
+            System.out.println("Leaving function: DIGIT Failure");
+            outStream.println("Leaving function: DIGIT Failure");
+            System.exit(0);
+            return false;
+        }
+    }
+
 
     public static String toLower(String input) {
         //Per instructions: "The language is not case sensitive." All input is converted to lower case to conform to logic of parser.
