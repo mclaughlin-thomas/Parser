@@ -81,7 +81,9 @@ public class Parser {
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
-        if (COMMAND(inStream, outStream)) {
+        String command = toLower(getNextLine(inStream));
+
+        if (COMMAND(inStream, outStream, command)) {
             try {
                 String nextLine = getNextLine(inStream);
                 if (nextLine != null && nextLine.equals("[")) {
@@ -256,11 +258,9 @@ public class Parser {
         return true;
     }
 
-    public static boolean COMMAND(Scanner inStream, PrintWriter outStream) {
+    public static boolean COMMAND(Scanner inStream, PrintWriter outStream, String command) {
         System.out.println("Entering function: COMMAND");
         outStream.println("Entering function: COMMAND");
-
-        String command = getNextLine(inStream);
 
         if (command == null) {
             System.out.println("Leaving function: COMMAND Failure");
@@ -269,11 +269,7 @@ public class Parser {
             return false;
         }
 
-        command = toLower(command);
-
         if (command.equals("st") || command.equals("ld") || command.equals("sub") || command.equals("add") || command.equals("sq") || command.equals("rt")) {
-            //System.out.println("Command Good!");
-            //outStream.println("Command Good!");
             System.out.println("Leaving function: COMMAND Success");
             outStream.println("Leaving function: COMMAND Success");
             return true;

@@ -1,0 +1,26 @@
+Entering function: START
+Entering function: COMMANDS
+Entering function: COMMAND
+Leaving function: COMMAND Success
+Entering function: REGISTER
+Leaving function: REGISTER Success
+Leaving function: COMMANDS Success
+Entering function: COMMANDS
+Entering function: COMMAND
+Leaving function: COMMAND Success
+Entering function: REGISTER
+Leaving function: REGISTER Success
+Leaving function: COMMANDS Success
+Entering function: COMMANDS
+Entering function: COMMAND
+Leaving function: COMMAND Success
+Entering function: REGISTER
+Leaving function: REGISTER Success
+Leaving function: COMMANDS Success
+Entering function: COMMANDS
+Entering function: COMMAND
+Leaving function: COMMAND Success
+Entering function: REGISTER
+Leaving function: REGISTER Success
+Leaving function: COMMANDS Success
+Leaving function: START Success
