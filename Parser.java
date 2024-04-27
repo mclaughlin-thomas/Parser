@@ -101,14 +101,25 @@ public class Parser {
 
             if (REGISTER(outStream, registerValueLine) == 1) {
                 RegValCheck = 1;
-                System.out.println("Register Good!");  
+                System.out.println("Register Good!"); 
+                
+                
+                //if it is a register, we need case for:
+                // 1. comma, register
+                // 2. comma, value
+                // 3. null, null
                 
                 //optional part of the grammar
+
 
             }
             else if (VALUE(outStream, registerValueLine) == 2) {
                 RegValCheck = 2;
                 System.out.println("Value Good!");
+
+                //if it is a value, we need case for:
+                // 1. value, comma, register
+                // This is the only case for a value, as a value cannot be followed by another value
 
                 //optional part of the grammar
 
