@@ -1,5 +1,7 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.PrintWriter; // Import the PrintWriter class to write text files
 
@@ -159,7 +161,6 @@ public class Parser {
         else {
             System.out.println("Leaving function: REGISTER Failure");
             outStream.println("Leaving function: REGISTER Failure");
-            System.exit(0);
             return 0;
         }
     }
@@ -184,9 +185,19 @@ public class Parser {
         System.out.println("Entering function: DIGITS");
         outStream.println("Entering function: DIGITS");
 
-        int digitCounter = 0;
+        int digitCounter = 0; // 0 means first digit, 1 means not first digit
+
+        List<String> digitList = new ArrayList<>();
+        for(int i = 0; i < registerValueLine.length(); i++) {
+            digitList.add(registerValueLine.substring(i, i+1));
+        }
+
 
         if (DIGIT(registerValueLine, outStream, digitCounter)) {
+            digitCounter++;
+            while (DIGIT(registerValueLine, outStream, digitCounter)) {
+                digitCounter = 1;
+            }
             
         }
         else {
@@ -205,17 +216,33 @@ public class Parser {
         System.out.println("Entering function: DIGIT");
         outStream.println("Entering function: DIGIT");
 
-        if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9")){
-            System.out.println("Leaving function: DIGIT Success");
-            outStream.println("Leaving function: DIGIT Success");
-            return true;
+        if (digitCounter == 0) {
+            if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9")){
+                System.out.println("Leaving function: DIGIT Success");
+                outStream.println("Leaving function: DIGIT Success");
+                return true;
+            }
+            else {
+                System.out.println("Leaving function: DIGIT Failure");
+                outStream.println("Leaving function: DIGIT Failure");
+                System.exit(0);
+                return false;
+            }
         }
         else {
-            System.out.println("Leaving function: DIGIT Failure");
-            outStream.println("Leaving function: DIGIT Failure");
-            System.exit(0);
-            return false;
+            if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9") || registerValueLine.equals(null)){
+                System.out.println("Leaving function: DIGIT Success");
+                outStream.println("Leaving function: DIGIT Success");
+                return true;
+            }
+            else {
+                System.out.println("Leaving function: DIGIT Failure");
+                outStream.println("Leaving function: DIGIT Failure");
+                System.exit(0);
+                return false;
+            }
         }
+
     }
 
 
