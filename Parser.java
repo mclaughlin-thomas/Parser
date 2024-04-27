@@ -87,25 +87,24 @@ public class Parser {
                 }
                 else if (VALUE(outStream, registerValueLine) == 2) {
                     RegValCheck = 2;
+                    System.out.println("Value Good!");
+
                 }
                 else {
                     System.out.println("Leaving function: COMMANDS Failure");
                     outStream.println("Leaving function: COMMANDS Failure");
-                    System.exit(0);
                     return false;
                 }
             }
             else {
                 System.out.println("Leaving function: COMMANDS Failure");
                 outStream.println("Leaving function: COMMANDS Failure");
-                System.exit(0);
                 return false;
             }
 
         } else {
             System.out.println("Leaving function: COMMANDS Failure");
             outStream.println("Leaving function: COMMANDS Failure");
-            System.exit(0);
             return false;
         }
 
@@ -176,7 +175,6 @@ public class Parser {
         } else {
             System.out.println("Leaving function: VALUE Failure");
             outStream.println("Leaving function: VALUE Failure");
-            System.exit(0);
             return 0;
         }
     }
@@ -193,17 +191,22 @@ public class Parser {
         }
 
 
-        if (DIGIT(registerValueLine, outStream, digitCounter)) {
+        if (DIGIT(digitList.get(0), outStream, digitCounter)) {
             digitCounter++;
-            while (DIGIT(registerValueLine, outStream, digitCounter)) {
-                digitCounter = 1;
+            for (int i = 1; i < digitList.size(); i++) {
+                if (DIGIT(digitList.get(i), outStream, digitCounter)) {
+                    digitCounter++;
+                } else {
+                    System.out.println("Leaving function: DIGITS Failure");
+                    outStream.println("Leaving function: DIGITS Failure");
+                    return false;
+                }
             }
             
         }
         else {
             System.out.println("Leaving function: DIGITS Failure");
             outStream.println("Leaving function: DIGITS Failure");
-            System.exit(0);
             return false;
         }
 
@@ -216,6 +219,8 @@ public class Parser {
         System.out.println("Entering function: DIGIT");
         outStream.println("Entering function: DIGIT");
 
+        System.out.println("Register Value Line: " + registerValueLine);
+
         if (digitCounter == 0) {
             if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9")){
                 System.out.println("Leaving function: DIGIT Success");
@@ -225,7 +230,6 @@ public class Parser {
             else {
                 System.out.println("Leaving function: DIGIT Failure");
                 outStream.println("Leaving function: DIGIT Failure");
-                System.exit(0);
                 return false;
             }
         }
@@ -238,7 +242,6 @@ public class Parser {
             else {
                 System.out.println("Leaving function: DIGIT Failure");
                 outStream.println("Leaving function: DIGIT Failure");
-                System.exit(0);
                 return false;
             }
         }
