@@ -33,8 +33,6 @@ public class Parser {
             System.exit(0);
         } // end catch
         
-        //call the Start grammar rule
-
         START(inStream, outStream);
 
         inStream.close();
