@@ -40,7 +40,7 @@ public class Parser {
 
     public static String toLower(String input) {
         //Per instructions: "The language is not case sensitive." All input is converted to lower case to conform to logic of parser.
-
+        
         return input.toLowerCase();
     }
 }
