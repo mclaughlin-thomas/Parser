@@ -41,6 +41,12 @@ public class Parser {
          * tokenPath - the path to the input file
          * outputPath - the path to the output file
          * parseIndication - a boolean to indicate if the program derived from the tokens is legal or not
+         * Arguments:
+         * args - the command line arguments
+         * Methods Called:    START() - evaluates the START grammar rule
+         *                    close() - closes the input file
+         *                    close() - closes the output file
+         * Returns:           void
         */
         
         Scanner inStream = null; // initialize read
