@@ -18,30 +18,41 @@ public class Parser {
         
         Scanner inStream = null; // initialize read
         PrintWriter outStream=null; // initialize write
+        String tokenPath = "prog4TMTokens.txt"; // path to input file
+        String outputPath = "Prog4TMout.txt"; // path to input file
 
         //try/catch for accessing input file to account for errors
         try
         {
-            inStream = new Scanner(new File("prog4TMTokens.txt"));
+            System.out.println("Checking the file " + tokenPath);
+            inStream = new Scanner(new File(tokenPath));
         } // end try
         catch(FileNotFoundException e)
         {
-            System.out.println("Error opening the file prog4TMTokens.txt");
+            System.out.println("Error opening the file " + tokenPath);
             System.exit(0);
         }
 
         //try/catch for accessing output file to account for errors
         try
         {
-            outStream = new PrintWriter("Prog4TMout.txt");
+            System.out.println("Opening the file " + outputPath);
+            outStream = new PrintWriter(outputPath);
         } // end try
         catch(FileNotFoundException e)
         {
-            System.out.println("error opening the file Prog4TMout.txt");
+            System.out.println("Error opening the file " + outputPath);
             System.exit(0);
         } // end catch
         
-        START(inStream, outStream);
+        Boolean parseIndication = START(inStream, outStream);
+
+        if(parseIndication){
+            System.out.println("The program in the input file successfully parsed and is a legal program!");
+        }
+        else{
+            System.out.println("The program in the input file did not successfully parse and is not a legal program!");
+        }
 
         inStream.close(); // close the input file
         outStream.close(); // close the output file
@@ -54,8 +65,8 @@ public class Parser {
         while (inStream.hasNextLine()) {
 
             if (!COMMANDS(inStream, outStream)) {
-                System.out.println("Leaving function: START Failure");
-                outStream.println("Leaving function: START Failure");
+                System.out.println("Leaving function: START Unsuccessful");
+                outStream.println("Leaving function: START Unsuccessful");
                 System.exit(0);
                 return false;
             }
@@ -77,13 +88,13 @@ public class Parser {
             try {
                 String nextLine = getNextLine(inStream);
                 if (!nextLine.equals("[")) {
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.out.println("Leaving function: COMMANDS Unsuccessful");
+                    outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 } 
             } catch (NullPointerException e) {
-                System.out.println("Leaving function: COMMANDS Failure");
-                outStream.println("Leaving function: COMMANDS Failure");
+                System.out.println("Leaving function: COMMANDS Unsuccessful");
+                outStream.println("Leaving function: COMMANDS Unsuccessful");
                 return false;
             }
                 
@@ -100,13 +111,13 @@ public class Parser {
                         return true;
                     }
                     else if( !nextLine.equals(",")){
-                        System.out.println("Leaving function: COMMANDS Failure");
-                        outStream.println("Leaving function: COMMANDS Failure");
+                        System.out.println("Leaving function: COMMANDS Unsuccessful");
+                        outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 } catch (NullPointerException e) {
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.out.println("Leaving function: COMMANDS Unsuccessful");
+                    outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
 
@@ -120,19 +131,19 @@ public class Parser {
                             return true;
                         } 
                         else {
-                            System.out.println("Leaving function: COMMANDS Failure");
-                            outStream.println("Leaving function: COMMANDS Failure");
+                            System.out.println("Leaving function: COMMANDS Unsuccessful");
+                            outStream.println("Leaving function: COMMANDS Unsuccessful");
                             return false;
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Leaving function: COMMANDS Failure");
-                        outStream.println("Leaving function: COMMANDS Failure");
+                        System.out.println("Leaving function: COMMANDS Unsuccessful");
+                        outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 }
                 else {
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.out.println("Leaving function: COMMANDS Unsuccessful");
+                    outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
             }
@@ -146,13 +157,13 @@ public class Parser {
                         return true;
                     }
                     else if( !nextLine.equals(",")){
-                        System.out.println("Leaving function: COMMANDS Failure");
-                        outStream.println("Leaving function: COMMANDS Failure");
+                        System.out.println("Leaving function: COMMANDS Unsuccessful");
+                        outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 } catch (NullPointerException e) {
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.out.println("Leaving function: COMMANDS Unsuccessful");
+                    outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
 
@@ -166,31 +177,31 @@ public class Parser {
                             return true;
                         } 
                         else {
-                            System.out.println("Leaving function: COMMANDS Failure");
-                            outStream.println("Leaving function: COMMANDS Failure");
+                            System.out.println("Leaving function: COMMANDS Unsuccessful");
+                            outStream.println("Leaving function: COMMANDS Unsuccessful");
                             return false;
                         }
                     } catch (NullPointerException e) {
-                        System.out.println("Leaving function: COMMANDS Failure");
-                        outStream.println("Leaving function: COMMANDS Failure");
+                        System.out.println("Leaving function: COMMANDS Unsuccessful");
+                        outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 }
                 else {
-                    System.out.println("Leaving function: COMMANDS Failure");
-                    outStream.println("Leaving function: COMMANDS Failure");
+                    System.out.println("Leaving function: COMMANDS Unsuccessful");
+                    outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
             }
             else {
-                System.out.println("Leaving function: COMMANDS Failure");
-                outStream.println("Leaving function: COMMANDS Failure");
+                System.out.println("Leaving function: COMMANDS Unsuccessful");
+                outStream.println("Leaving function: COMMANDS Unsuccessful");
                 return false;
             }
         }
 
-        System.out.println("Leaving function: COMMANDS Failure");
-        outStream.println("Leaving function: COMMANDS Failure");
+        System.out.println("Leaving function: COMMANDS Unsuccessful");
+        outStream.println("Leaving function: COMMANDS Unsuccessful");
         return false;
     }
 
@@ -203,8 +214,8 @@ public class Parser {
             outStream.println("Leaving function: COMMAND Success");
             return true;
         } else {
-            System.out.println("Leaving function: COMMAND Failure");
-            outStream.println("Leaving function: COMMAND Failure");
+            System.out.println("Leaving function: COMMAND Unsuccessful");
+            outStream.println("Leaving function: COMMAND Unsuccessful");
             return false;
         }
     }
@@ -219,8 +230,8 @@ public class Parser {
             return 1;
         }
         else {
-            System.out.println("Leaving function: REGISTER Failure");
-            outStream.println("Leaving function: REGISTER Failure");
+            System.out.println("Leaving function: REGISTER Unsuccessful");
+            outStream.println("Leaving function: REGISTER Unsuccessful");
             return 0;
         }
     }
@@ -234,8 +245,8 @@ public class Parser {
             outStream.println("Leaving function: VALUE Success");
             return 2;
         } else {
-            System.out.println("Leaving function: VALUE Failure");
-            outStream.println("Leaving function: VALUE Failure");
+            System.out.println("Leaving function: VALUE Unsuccessful");
+            outStream.println("Leaving function: VALUE Unsuccessful");
             return 0;
         }
     }
@@ -257,15 +268,15 @@ public class Parser {
                 if (DIGIT(digitList.get(i), outStream, digitCounter)) {
                     digitCounter++;
                 } else {
-                    System.out.println("Leaving function: DIGITS Failure");
-                    outStream.println("Leaving function: DIGITS Failure");
+                    System.out.println("Leaving function: DIGITS Unsuccessful");
+                    outStream.println("Leaving function: DIGITS Unsuccessful");
                     return false;
                 }
             }
         }
         else {
-            System.out.println("Leaving function: DIGITS Failure");
-            outStream.println("Leaving function: DIGITS Failure");
+            System.out.println("Leaving function: DIGITS Unsuccessful");
+            outStream.println("Leaving function: DIGITS Unsuccessful");
             return false;
         }
 
@@ -285,8 +296,8 @@ public class Parser {
                 return true;
             }
             else {
-                System.out.println("Leaving function: DIGIT Failure");
-                outStream.println("Leaving function: DIGIT Failure");
+                System.out.println("Leaving function: DIGIT Unsuccessful");
+                outStream.println("Leaving function: DIGIT Unsuccessful");
                 return false;
             }
         }
@@ -297,8 +308,8 @@ public class Parser {
                 return true;
             }
             else {
-                System.out.println("Leaving function: DIGIT Failure");
-                outStream.println("Leaving function: DIGIT Failure");
+                System.out.println("Leaving function: DIGIT Unsuccessful");
+                outStream.println("Leaving function: DIGIT Unsuccessful");
                 return false;
             }
         }
