@@ -91,8 +91,10 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the START grammar rule. This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS.
+         *              While there are more lines in the input file, the START method will call the COMMANDS method to evaluate the COMMANDS grammar rule. If the COMMANDS method returns
+         *              false, the START method will return false signifying the program in the input file is not a legal program.
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              START -> { COMMANDS } 
          * 
@@ -123,14 +125,19 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the COMMANDS grammar rule: which is a non-terminal symbol of COMMAND, followed by a terminal symbol of '[' and then either a terminal symbol of REGISTER or VALUE
+         *              followed by an optional portion of a terminal symbol of ',' and then a terminal symbol of REGISTER, and always end by a terminal symbol of ']'.
+         *              LOGIC
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
          * 
          * Variables: 
          * instream - for reading from the input file
          * outStream - for writing to the output file
+         * command - the command token read from the input file to be evaluated
+         * nextLine - the next line in the input file to be evaluated, used in try catches for the (expected) terminals : '[' , ']', and ','
+         * registerValueLine - the (expected) register or value token read from the input file to be evaluated
         */
 
         System.out.println("Entering function: COMMANDS");
@@ -265,8 +272,9 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the COMMAND grammar rule: which is a terminal symbol of 'st', 'ld', 'sub', 'add', 'sq', or 'rt'.
+         *              LOGIC
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
          * 
@@ -295,13 +303,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the REGISTER grammar rule: which is a terminal symbol of 'a', 'b', 'c', 'd', 'e', or 'f'.
+         *              LOGIC
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
          * 
          * Variables: 
-         * instream - for reading from the input file
+         * registerValueLine - the register or value token to be evaluated
          * outStream - for writing to the output file
         */
 
@@ -326,13 +335,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the VALUE grammar rule: which is a non-terminal symbol of DIGITS.
+         *              LOGIC
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              VALUE -> DIGITS
          * 
          * Variables: 
-         * instream - for reading from the input file
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
          * outStream - for writing to the output file
         */
 
@@ -356,14 +366,17 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the DIGITS grammar rule: which is a non-terminal symbol of DIGIT, followed by 0 or more DIGIT non-terminals.
+         *              LOGIC
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              DIGITS -> DIGIT {DIGIT} 
          * 
          * Variables: 
-         * instream - for reading from the input file
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
          * outStream - for writing to the output file
+         * digitCounter - a counter to determine if the first digit has been evaluated or not
+         * digitList - a list of the digits in the registerValueLine to be evaluated
         */
 
         System.out.println("Entering function: DIGITS");
@@ -405,14 +418,16 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
-         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * Description: This method evaluates the DIGIT grammar rule: which is a terminal symbol of '0', '1', '2', '3', '4', '5', '6', '7', '8', or '9'.
+         *              0-9 will evaluate as true upon first digit only, for all other digits it will evaluate as true for 0-9 as well as null.
+         *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              DIGIT -> ‘0’ | .. | ‘9’
          * 
          * Variables: 
-         * instream - for reading from the input file
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
          * outStream - for writing to the output file
+         * digitCounter - a counter to determine if the first digit has been evaluated or not
         */
 
         System.out.println("Entering function: DIGIT");
@@ -455,8 +470,7 @@ public class Parser {
          *              "The language is not case sensitive."
          * 
          * Variables: 
-         * instream - for reading from the input file
-         * outStream - for writing to the output file
+         * input - the input string to be converted to lowercase
         */
 
         return input.toLowerCase();
