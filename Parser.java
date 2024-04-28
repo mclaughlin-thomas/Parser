@@ -81,7 +81,7 @@ public class Parser {
             System.exit(0);
         } // end catch
         
-        Boolean parseIndication = START(inStream, outStream);
+        Boolean parseIndication = START(inStream, outStream); // call the START method to parse the tokens in the input token file, value is stored in parseIndication
 
         if(parseIndication){
             System.out.println("The program in the input file successfully parsed and is a legal program!");
