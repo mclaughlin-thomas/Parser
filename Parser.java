@@ -1,6 +1,6 @@
 /*
  * Java Programming Assignment #2  Spring 2024 – Parser (Strictly Provided Grammar Version)
- * Description: This program reads a file, parses the tokens based on grammar rules, and notifies the user if the program is legal or not.
+ * Description: This program reads a file of tokens, parses the tokens based on grammar rules, and notifies the user if the program is legal or not.
  * CS-310 Programming Languages
  * Thomas McLaughlin
  * 04/30/2024
@@ -41,7 +41,6 @@ public class Parser {
          * tokenPath - the path to the input file
          * outputPath - the path to the output file
          * parseIndication - a boolean to indicate if the program derived from the tokens is legal or not
-         * 
         */
         
         Scanner inStream = null; // initialize read
