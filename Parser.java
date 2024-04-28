@@ -13,14 +13,6 @@ import java.util.List; // Import the List class
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.PrintWriter; // Import the PrintWriter class to write text files
 
-// START -> { COMMANDS }
-// COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
-// COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
-// REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
-// VALUE -> DIGITS
-// DIGIT -> ‘0’ | .. | ‘9’
-// DIGITS -> DIGIT {DIGIT}
-
 public class Parser {
     public static void main(String[] args) {
         /*
