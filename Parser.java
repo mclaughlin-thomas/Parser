@@ -91,27 +91,25 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              START -> { COMMANDS } 
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: START");
         outStream.println("Entering function: START");
 
         while (inStream.hasNextLine()) {
-
             if (!COMMANDS(inStream, outStream)) {
                 System.out.println("Leaving function: START Unsuccessful");
                 outStream.println("Leaving function: START Unsuccessful");
                 return false;
-            }
-            
+            }   
         }
 
         System.out.println("Leaving function: START Success");
@@ -121,18 +119,18 @@ public class Parser {
 
     public static boolean COMMANDS(Scanner inStream, PrintWriter outStream) {
         /*
-         * Method:public static boolean COMMANDS(Scanner inStream, PrintWriter outStream)
+         * Method: public static boolean COMMANDS(Scanner inStream, PrintWriter outStream) {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: COMMANDS");
@@ -267,14 +265,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: COMMAND");
@@ -293,18 +291,18 @@ public class Parser {
 
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
         /*
-         * Method: public static int REGISTER(PrintWriter outStream, String registerValueLine)
+         *public static int REGISTER(PrintWriter outStream, String registerValueLine)
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: REGISTER");
@@ -322,20 +320,20 @@ public class Parser {
         }
     }
 
-    public static int VALUE(PrintWriter outStream, String registerValueLine){
+    public static int VALUE(PrintWriter outStream, String registerValueLine) {
         /*
          * Method: public static int VALUE(PrintWriter outStream, String registerValueLine)
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              VALUE -> DIGITS
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: VALUE");
@@ -358,14 +356,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              DIGITS -> DIGIT {DIGIT} 
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: DIGITS");
@@ -407,14 +405,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method initiates the first grammar rule which indicates the non-terminal symbol START can have 0 or more COMMANDS; however, the COMMANDS grammar rule method must evaluate to true
+         *              for the START method to return true. The method prints to the terminal and logs to the output file to track the flow of execution.
+         * 
+         *              DIGIT -> ‘0’ | .. | ‘9’
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
         System.out.println("Entering function: DIGIT");
@@ -453,17 +451,14 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method simply converts the input string to lowercase. This method is used to convert the input tokens to lowercase for case insensitivity as it said in the instructions:
+         *              "The language is not case sensitive."
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
+         * instream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
         */
 
-        //"The language is not case sensitive."
         return input.toLowerCase();
     }
 
@@ -473,20 +468,16 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method simply returns the next line in the input file if there is one, otherwise it returns null. This method is used to read the next line in the input file.
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
-         * inStream - for reading from the input file
-         * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+         * instream - for reading from the input file, will use it's .hasNextLine() and .nextLine() methods to read the next line
         */
 
         if (inStream.hasNextLine()) {
             return inStream.nextLine();
         } else {
-            return null;
+            return null; // return null if there are no more lines to read
         }
     }
 }
