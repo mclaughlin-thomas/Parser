@@ -1,3 +1,11 @@
+/*
+ * Java Programming Assignment #2  Spring 2024 – Parser (Strictly Provided Grammar Version)
+ * Description: This program reads a file, parses the tokens based on grammar rules, and notifies the user if the program is legal or not.
+ * CS-310 Programming Languages
+ * Thomas McLaughlin
+ * 04/30/2024
+*/
+
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList; // Import the ArrayList class
@@ -15,6 +23,20 @@ import java.io.PrintWriter; // Import the PrintWriter class to write text files
 
 public class Parser {
     public static void main(String[] args) {
+        /*
+         * Method: public static void main(String [] args)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
         
         Scanner inStream = null; // initialize read
         PrintWriter outStream=null; // initialize write
@@ -59,6 +81,21 @@ public class Parser {
     }
 
     public static boolean START(Scanner inStream,PrintWriter outStream) {
+        /*
+         * Method: public static boolean START(Scanner inStream,PrintWriter outStream)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: START");
         outStream.println("Entering function: START");
 
@@ -78,6 +115,21 @@ public class Parser {
     }
 
     public static boolean COMMANDS(Scanner inStream, PrintWriter outStream) {
+        /*
+         * Method:public static boolean COMMANDS(Scanner inStream, PrintWriter outStream)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
@@ -205,6 +257,21 @@ public class Parser {
     }
 
     public static boolean COMMAND(Scanner inStream, PrintWriter outStream, String command) {
+        /*
+         * Method: public static boolean COMMAND(Scanner inStream, PrintWriter outStream, String command)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: COMMAND");
         outStream.println("Entering function: COMMAND");
 
@@ -220,6 +287,21 @@ public class Parser {
     }
 
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
+        /*
+         * Method: public static int REGISTER(PrintWriter outStream, String registerValueLine)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: REGISTER");
         outStream.println("Entering function: REGISTER");
 
@@ -236,6 +318,21 @@ public class Parser {
     }
 
     public static int VALUE(PrintWriter outStream, String registerValueLine){
+        /*
+         * Method: public static int VALUE(PrintWriter outStream, String registerValueLine)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: VALUE");
         outStream.println("Entering function: VALUE");
         
@@ -251,6 +348,21 @@ public class Parser {
     }
 
     public static boolean DIGITS(String registerValueLine, PrintWriter outStream) {
+        /*
+         * Method: public static boolean DIGITS(String registerValueLine, PrintWriter outStream)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: DIGITS");
         outStream.println("Entering function: DIGITS");
 
@@ -285,6 +397,21 @@ public class Parser {
     }
 
     public static boolean DIGIT(String registerValueLine,PrintWriter outStream, int digitCounter) {
+        /*
+         * Method: public static boolean DIGIT(String registerValueLine,PrintWriter outStream, int digitCounter)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         System.out.println("Entering function: DIGIT");
         outStream.println("Entering function: DIGIT");
 
@@ -316,11 +443,41 @@ public class Parser {
     }
 
     public static String toLower(String input) {
+        /*
+         * Method: public static String toLower(String input)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         //"The language is not case sensitive."
         return input.toLowerCase();
     }
 
     public static String getNextLine(Scanner inStream) {
+        /*
+         * Method: public static String getNextLine(Scanner inStream)
+         * Programmer: Thomas McLaughlin
+         * Date Created: 4/26/2024
+         * Last Modified: 4/30/2024
+         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
+         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Variables: 
+         * in - a scanner object to read from the input file 
+         * inStream - for reading from the input file
+         * outStream - for writing to the output file
+         * line - the current line being read from the input file
+         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+        */
+
         if (inStream.hasNextLine()) {
             return inStream.nextLine();
         } else {
