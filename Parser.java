@@ -21,7 +21,7 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method serves as the entry point of the Parser program. It initializes the file streams for reading the input token file as well as the writing output file.
-         *              This method reads from a file named "prog4TMTokens.txt" containing tokens and the program multiple functions that act as the grammar rules to validate and parse
+         *              This method reads from a file named "prog4TMTokens.txt" containing tokens and the program calls multiple functions that act as the grammar rules to validate and parse
          *              the tokens. At the end, it outputs whether the tokens in the file are legal or not based on the grammar provided below. The method prints to the terminal and logs
          *              to the output file throughout the process for tracking the flow of execution.
          * 
@@ -101,6 +101,12 @@ public class Parser {
          * Variables: 
          * instream - for reading from the input file
          * outStream - for writing to the output file
+         * Arguments:
+         * instream - for reading from the input file
+         * outStream - for writing to the output file
+         * Methods Called:    COMMANDS() - evaluates the COMMANDS grammar rule
+         *                    hasNextLine() - checks if there is another line in the input file
+         * Returns:           true if the tokens conforms to the START grammar rule (which calls COMMANDS), otherwise it returns false
         */
 
         System.out.println("Entering function: START");
@@ -126,8 +132,7 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method evaluates the COMMANDS grammar rule: which is a non-terminal symbol of COMMAND, followed by a terminal symbol of '[' and then either a terminal symbol of REGISTER or VALUE
-         *              followed by an optional portion of a terminal symbol of ',' and then a terminal symbol of REGISTER, and always end by a terminal symbol of ']'.
-         *              LOGIC
+         *              followed by an optional portion of a terminal symbol of ',' and then a terminal symbol of REGISTER, and always end by a terminal symbol of ']'.    The  ", REGISTER" is optional.
          *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
@@ -138,6 +143,15 @@ public class Parser {
          * command - the command token read from the input file to be evaluated
          * nextLine - the next line in the input file to be evaluated, used in try catches for the (expected) terminals : '[' , ']', and ','
          * registerValueLine - the (expected) register or value token read from the input file to be evaluated
+         * Arguments:
+         * instream - for reading from the input file
+         * outStream - for writing to the output file
+         * Methods Called:    COMMAND() - evaluates the COMMAND grammar rule
+         *                    REGISTER() - evaluates the REGISTER grammar rule
+         *                    VALUE() - evaluates the VALUE grammar rule
+         *                    getNextLine() - reads the next line in the input file
+         *                    toLower() - converts the input string to lowercase
+         * Returns:           true if the tokens conforms to the COMMANDS grammar rule (which calls other grammar rules), otherwise it returns false
         */
 
         System.out.println("Entering function: COMMANDS");
@@ -273,7 +287,7 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method evaluates the COMMAND grammar rule: which is a terminal symbol of 'st', 'ld', 'sub', 'add', 'sq', or 'rt'.
-         *              LOGIC
+         *              This method compares the command token to the valid command tokens and returns true if it is a valid command token, otherwise it returns false.
          *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
@@ -281,6 +295,13 @@ public class Parser {
          * Variables: 
          * instream - for reading from the input file
          * outStream - for writing to the output file
+         * command - the command token read from the input file to be evaluated
+         * Arguments:
+         * instream - for reading from the input file
+         * outStream - for writing to the output file
+         * command - the command token read from the input file to be evaluated
+         * Methods Called:    equals() - compares the command token to the valid command tokens
+         * Returns:           true if the command conforms to the COMMAND grammar rule, otherwise it returns false
         */
 
         System.out.println("Entering function: COMMAND");
@@ -304,14 +325,19 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method evaluates the REGISTER grammar rule: which is a terminal symbol of 'a', 'b', 'c', 'd', 'e', or 'f'.
-         *              LOGIC
+         *              This method compares the registerValueLine to the valid register tokens and returns 1 if it is a valid register token, otherwise it returns 0.
          *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
          * 
          * Variables: 
-         * registerValueLine - the register or value token to be evaluated
          * outStream - for writing to the output file
+         * registerValueLine - the register or value token to be evaluated
+         * Arguments:
+         * outStream - for writing to the output file
+         * registerValueLine - the register or value token to be evaluated
+         * Methods Called:    equals() - compares the registerValueLine to the valid register tokens
+         * Returns:           1 if the registerValueLine conforms to the REGISTER grammar rule, otherwise it returns 0
         */
 
         System.out.println("Entering function: REGISTER");
@@ -336,14 +362,19 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method evaluates the VALUE grammar rule: which is a non-terminal symbol of DIGITS.
-         *              LOGIC
+         *              This method checks the result of the DIGITS method to determine if the registerValueLine is a valid digit token or not.
          *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              VALUE -> DIGITS
          * 
-         * Variables: 
-         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
+         * Variables:
          * outStream - for writing to the output file
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
+         * Arguments:
+         * outStream - for writing to the output file
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
+         * Methods Called:    DIGITS() - evaluates the DIGITS grammar rule
+         * Returns:           2 if the registerValueLine conforms to the VALUE grammar rule, otherwise it returns 0
         */
 
         System.out.println("Entering function: VALUE");
@@ -367,7 +398,7 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method evaluates the DIGITS grammar rule: which is a non-terminal symbol of DIGIT, followed by 0 or more DIGIT non-terminals.
-         *              LOGIC
+         *              This method creates a list of the digits in the registerValueLine and then evaluates each digit using the DIGIT method. If the DIGIT method returns false, the DIGITS method will return false.
          *              The method prints to the terminal and logs to the output file to track the flow of execution.
          * 
          *              DIGITS -> DIGIT {DIGIT} 
@@ -377,6 +408,15 @@ public class Parser {
          * outStream - for writing to the output file
          * digitCounter - a counter to determine if the first digit has been evaluated or not
          * digitList - a list of the digits in the registerValueLine to be evaluated
+         * Arguments:
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
+         * outStream - for writing to the output file
+         * Methods Called:    DIGIT() - evaluates the DIGIT grammar rule
+         *                    substring() - gets the substring of the registerValueLine
+         *                    add() - adds the digit to the digitList
+         *                    get() - gets the digit from the digitList
+         *                    size() - gets the size of the digitList
+         * Returns:           true if the registerValueLine conforms to the DIGITS grammar rule, otherwise it returns false
         */
 
         System.out.println("Entering function: DIGITS");
@@ -428,6 +468,12 @@ public class Parser {
          * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
          * outStream - for writing to the output file
          * digitCounter - a counter to determine if the first digit has been evaluated or not
+         * Arguments:
+         * registerValueLine - the register or value token to be evaluated (not necessarily a digit, but the method will check if it is a digit or not)
+         * outStream - for writing to the output file
+         * digitCounter - a counter to determine if the first digit has been evaluated or not
+         * Methods Called:    equals() - compares the registerValueLine to the valid digit tokens
+         * Returns:           true if the registerValueLine conforms to the DIGIT grammar rule, otherwise it returns false
         */
 
         System.out.println("Entering function: DIGIT");
@@ -471,6 +517,10 @@ public class Parser {
          * 
          * Variables: 
          * input - the input string to be converted to lowercase
+         * Arguments:
+         * input - the input string to be converted to lowercase
+         * Methods Called:    toLowerCase() - converts the input string to lowercase
+         * Returns:           the input string converted to lowercase
         */
 
         return input.toLowerCase();
@@ -486,6 +536,11 @@ public class Parser {
          * 
          * Variables: 
          * instream - for reading from the input file, will use it's .hasNextLine() and .nextLine() methods to read the next line
+         * Arguments:
+         * inStream - for reading from the input file, will use it's .hasNextLine() and .nextLine() methods to read the next line
+         * Methods Called:    hasNextLine() - checks if there is another line in the input file
+         *                    nextLine() - reads the next line in the input file
+         * Returns:           the next line in the input file if there is one, otherwise it returns null
         */
 
         if (inStream.hasNextLine()) {
