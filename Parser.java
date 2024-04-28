@@ -28,20 +28,34 @@ public class Parser {
          * Programmer: Thomas McLaughlin
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
-         * Description: This method reads a file and tokenizes the input. It then writes the tokens to an output file.
-         *              It uses the lexicalAnalyzer method to tokenize the input.
+         * Description: This method serves as the entry point of the Parser program. It initializes the file streams for reading the input token file as well as the writing output file.
+         *              This method reads from a file named "prog4TMTokens.txt" containing tokens and the program multiple functions that act as the grammar rules to validate and parse
+         *              the tokens. At the end, it outputs whether the tokens in the file are legal or not based on the grammar provided below. The method prints to the terminal and logs
+         *              to the output file throughout the process for tracking the flow of execution.
+         * 
+         *              Grammar rules:
+         *              START -> { COMMANDS }
+         *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
+         *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
+         *              REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
+         *              VALUE -> DIGITS
+         *              DIGIT -> ‘0’ | .. | ‘9’
+         *              DIGITS -> DIGIT {DIGIT}
+         * 
+         * 
          * Variables: 
-         * in - a scanner object to read from the input file 
          * inStream - for reading from the input file
          * outStream - for writing to the output file
-         * line - the current line being read from the input file
-         * tokens - a LinkedList of strings to store tokens from lexicalAnalyzer
+         * tokenPath - the path to the input file
+         * outputPath - the path to the output file
+         * parseIndication - a boolean to indicate if the program derived from the tokens is legal or not
+         * 
         */
         
         Scanner inStream = null; // initialize read
         PrintWriter outStream=null; // initialize write
         String tokenPath = "prog4TMTokens.txt"; // path to input file
-        String outputPath = "Prog4TMout.txt"; // path to input file
+        String outputPath = "Prog4TMout.txt"; // path to output file
 
         //try/catch for accessing input file to account for errors
         try
