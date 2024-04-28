@@ -67,7 +67,6 @@ public class Parser {
             if (!COMMANDS(inStream, outStream)) {
                 System.out.println("Leaving function: START Unsuccessful");
                 outStream.println("Leaving function: START Unsuccessful");
-                System.exit(0);
                 return false;
             }
             
