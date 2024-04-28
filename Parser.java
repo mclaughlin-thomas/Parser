@@ -80,16 +80,16 @@ public class Parser {
         
         Boolean parseIndication = START(inStream, outStream); // call the START method to parse the tokens in the input token file, value is stored in parseIndication
 
-        if(parseIndication){
+        if(parseIndication){ // if the program is legal | True
             System.out.println("The program in the input file successfully parsed and is a legal program!");
         }
-        else{
+        else{ // if the program is not legal | False
             System.out.println("The program in the input file did not successfully parse and is not a legal program!");
         }
 
         inStream.close(); // close the input file
         outStream.close(); // close the output file
-    }
+    } // end main
 
     public static boolean START(Scanner inStream,PrintWriter outStream) {
         /*
@@ -118,8 +118,8 @@ public class Parser {
         System.out.println("Entering function: START");
         outStream.println("Entering function: START");
 
-        while (inStream.hasNextLine()) {
-            if (!COMMANDS(inStream, outStream)) {
+        while (inStream.hasNextLine()) { // while there are more lines in the input file
+            if (!COMMANDS(inStream, outStream)) { // if the COMMANDS method returns false
                 System.out.println("Leaving function: START Unsuccessful");
                 outStream.println("Leaving function: START Unsuccessful");
                 return false;
@@ -129,7 +129,7 @@ public class Parser {
         System.out.println("Leaving function: START Success");
         outStream.println("Leaving function: START Success");
         return true;
-    }
+    } // end START
 
     public static boolean COMMANDS(Scanner inStream, PrintWriter outStream) {
         /*
@@ -163,118 +163,118 @@ public class Parser {
         System.out.println("Entering function: COMMANDS");
         outStream.println("Entering function: COMMANDS");
 
-        String command = toLower(getNextLine(inStream));
+        String command = toLower(getNextLine(inStream)); // get the next line in the input file and convert it to lowercase
 
-        if (COMMAND(inStream, outStream, command)) {
+        if (COMMAND(inStream, outStream, command)) { // if the COMMAND method returns true given the command token
             try {
-                String nextLine = getNextLine(inStream);
-                if (!nextLine.equals("[")) {
+                String nextLine = getNextLine(inStream); // get the next line in the input file
+                if (!nextLine.equals("[")) { // if the next line is not '[' return false, that is not valid
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 } 
-            } catch (NullPointerException e) {
+            } catch (NullPointerException e) { // if there is no next line, return false
                 System.out.println("Leaving function: COMMANDS Unsuccessful");
                 outStream.println("Leaving function: COMMANDS Unsuccessful");
                 return false;
             }
                 
-            String registerValueLine = toLower(getNextLine(inStream));
+            String registerValueLine = toLower(getNextLine(inStream)); // get the next line in the input file after the bracket and convert it to lowercase
 
-            if (REGISTER(outStream, registerValueLine) == 1) {
+            if (REGISTER(outStream, registerValueLine) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
                 
                 //optional part of the grammar
                 try {
                     String nextLine = getNextLine(inStream);
-                    if(nextLine.equals("]")){
+                    if(nextLine.equals("]")){ // check if end early before the optional portion
                         System.out.println("Leaving function: COMMANDS Success");
                         outStream.println("Leaving function: COMMANDS Success");
                         return true;
                     }
-                    else if( !nextLine.equals(",")){
+                    else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
-                } catch (NullPointerException e) {
+                } catch (NullPointerException e) { // if there is no next line, return false
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
 
-                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
+                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
 
                     try {
                         String nextLine = getNextLine(inStream);
-                        if (nextLine != null && nextLine.equals("]")) {
+                        if (nextLine.equals("]")) { // if the next line is the end bracket, return true
                             System.out.println("Leaving function: COMMANDS Success");
                             outStream.println("Leaving function: COMMANDS Success");
                             return true;
                         } 
-                        else {
+                        else { // if the next line is not the end bracket, return false
                             System.out.println("Leaving function: COMMANDS Unsuccessful");
                             outStream.println("Leaving function: COMMANDS Unsuccessful");
                             return false;
                         }
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e) { // if there is no next line, return false
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 }
-                else {
+                else { // if the REGISTER method returns 0 (Unsuccessful) given the registerValueLine, return false
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
             }
-            else if (VALUE(outStream, registerValueLine) == 2) {
+            else if (VALUE(outStream, registerValueLine) == 2) { // if the VALUE method returns 2 (Successful) given the registerValueLine
                 //optional part of the grammar
                 try {
                     String nextLine = getNextLine(inStream);
-                    if(nextLine.equals("]")){
+                    if(nextLine.equals("]")){ // check if end early before the optional portion
                         System.out.println("Leaving function: COMMANDS Success");
                         outStream.println("Leaving function: COMMANDS Success");
                         return true;
                     }
-                    else if( !nextLine.equals(",")){
+                    else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
-                } catch (NullPointerException e) {
+                } catch (NullPointerException e) { // if there is no next line, return false
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
 
-                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) {
+                if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
 
                     try {
                         String nextLine = getNextLine(inStream);
-                        if (nextLine != null && nextLine.equals("]")) {
+                        if (nextLine.equals("]")) { // if the next line is the end bracket, return true
                             System.out.println("Leaving function: COMMANDS Success");
                             outStream.println("Leaving function: COMMANDS Success");
                             return true;
                         } 
-                        else {
+                        else { // if the next line is not the end bracket, return false
                             System.out.println("Leaving function: COMMANDS Unsuccessful");
                             outStream.println("Leaving function: COMMANDS Unsuccessful");
                             return false;
                         }
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException e) { // if there is no next line, return false
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
                 }
-                else {
+                else { // if the REGISTER method returns 0 (Unsuccessful) given the registerValueLine, return false
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
             }
-            else {
+            else { // if the REGISTER method returns 0 (Unsuccessful) given the registerValueLine, return false
                 System.out.println("Leaving function: COMMANDS Unsuccessful");
                 outStream.println("Leaving function: COMMANDS Unsuccessful");
                 return false;
@@ -284,7 +284,7 @@ public class Parser {
         System.out.println("Leaving function: COMMANDS Unsuccessful");
         outStream.println("Leaving function: COMMANDS Unsuccessful");
         return false;
-    }
+    } // end COMMANDS
 
     public static boolean COMMAND(Scanner inStream, PrintWriter outStream, String command) {
         /*
@@ -313,16 +313,17 @@ public class Parser {
         System.out.println("Entering function: COMMAND");
         outStream.println("Entering function: COMMAND");
 
+        // checking if command is a valid command token
         if (command.equals("st") || command.equals("ld") || command.equals("sub") || command.equals("add") || command.equals("sq") || command.equals("rt")) {
             System.out.println("Leaving function: COMMAND Success");
             outStream.println("Leaving function: COMMAND Success");
             return true;
-        } else {
+        } else { // if command is not a valid command token
             System.out.println("Leaving function: COMMAND Unsuccessful");
             outStream.println("Leaving function: COMMAND Unsuccessful");
             return false;
         }
-    }
+    } // end COMMAND
 
     public static int REGISTER(PrintWriter outStream, String registerValueLine) {
         /*
@@ -349,17 +350,18 @@ public class Parser {
         System.out.println("Entering function: REGISTER");
         outStream.println("Entering function: REGISTER");
 
+        // checking if the registerValueLine passed to the REGISTER method is a valid register token
         if (registerValueLine.equals("a") || registerValueLine.equals("b") || registerValueLine.equals("c") || registerValueLine.equals("d") || registerValueLine.equals("e") || registerValueLine.equals("f")) {
             System.out.println("Leaving function: REGISTER Success");
             outStream.println("Leaving function: REGISTER Success");
             return 1;
         }
-        else {
+        else { // if the registerValueLine is not a valid register token
             System.out.println("Leaving function: REGISTER Unsuccessful");
             outStream.println("Leaving function: REGISTER Unsuccessful");
             return 0;
         }
-    }
+    } // end REGISTER
 
     public static int VALUE(PrintWriter outStream, String registerValueLine) {
         /*
@@ -386,16 +388,17 @@ public class Parser {
         System.out.println("Entering function: VALUE");
         outStream.println("Entering function: VALUE");
         
+        // checking if the registerValueLine passed to the DIGITS method is a valid digit token
         if (DIGITS(registerValueLine, outStream)) {
             System.out.println("Leaving function: VALUE Success");
             outStream.println("Leaving function: VALUE Success");
             return 2;
-        } else {
+        } else { // if the registerValueLine is not a valid digit token
             System.out.println("Leaving function: VALUE Unsuccessful");
             outStream.println("Leaving function: VALUE Unsuccessful");
             return 0;
         }
-    }
+    } // end VALUE
 
     public static boolean DIGITS(String registerValueLine, PrintWriter outStream) {
         /*
@@ -428,26 +431,26 @@ public class Parser {
         System.out.println("Entering function: DIGITS");
         outStream.println("Entering function: DIGITS");
 
-        int digitCounter = 0; // 0 means first digit, 1 means not first digit
+        int digitCounter = 0; // 0 means first digit, 1 or more indicates it is not first digit
 
-        List<String> digitList = new ArrayList<>();
+        List<String> digitList = new ArrayList<>(); // creating a list of digits to hold each digit in the registerValueLine
         for(int i = 0; i < registerValueLine.length(); i++) {
-            digitList.add(registerValueLine.substring(i, i+1));
+            digitList.add(registerValueLine.substring(i, i+1)); // add each digit to the list
         }
 
-        if (DIGIT(digitList.get(0), outStream, digitCounter)) {
+        if (DIGIT(digitList.get(0), outStream, digitCounter)) { // if the first digit is a digit
             digitCounter++;
             for (int i = 1; i < digitList.size(); i++) {
-                if (DIGIT(digitList.get(i), outStream, digitCounter)) {
+                if (DIGIT(digitList.get(i), outStream, digitCounter)) { // checking each digit in the list to see if it is a digit
                     digitCounter++;
-                } else {
+                } else { // if current digit in the list is not a digit
                     System.out.println("Leaving function: DIGITS Unsuccessful");
                     outStream.println("Leaving function: DIGITS Unsuccessful");
                     return false;
                 }
             }
         }
-        else {
+        else { // if the first digit is not a digit
             System.out.println("Leaving function: DIGITS Unsuccessful");
             outStream.println("Leaving function: DIGITS Unsuccessful");
             return false;
@@ -456,7 +459,7 @@ public class Parser {
         System.out.println("Leaving function: DIGITS Success");
         outStream.println("Leaving function: DIGITS Success");
         return true;
-    }
+    } // end DIGITS
 
     public static boolean DIGIT(String registerValueLine,PrintWriter outStream, int digitCounter) {
         /*
@@ -485,32 +488,32 @@ public class Parser {
         System.out.println("Entering function: DIGIT");
         outStream.println("Entering function: DIGIT");
 
-        if (digitCounter == 0) {
+        if (digitCounter == 0) { // if it is the first digit, we do not allow null or empty string
             if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9")){
                 System.out.println("Leaving function: DIGIT Success");
                 outStream.println("Leaving function: DIGIT Success");
                 return true;
             }
-            else {
+            else { // not a digit
                 System.out.println("Leaving function: DIGIT Unsuccessful");
                 outStream.println("Leaving function: DIGIT Unsuccessful");
                 return false;
             }
         }
-        else {
+        else { // if it is not the first digit, we allow null or empty string
             if (registerValueLine.equals("0") || registerValueLine.equals("1") || registerValueLine.equals("2") || registerValueLine.equals("3") || registerValueLine.equals("4") || registerValueLine.equals("5") || registerValueLine.equals("6") || registerValueLine.equals("7") || registerValueLine.equals("8") || registerValueLine.equals("9") || registerValueLine.equals(null)){
                 System.out.println("Leaving function: DIGIT Success");
                 outStream.println("Leaving function: DIGIT Success");
                 return true;
             }
-            else {
+            else { // not a digit or empty string
                 System.out.println("Leaving function: DIGIT Unsuccessful");
                 outStream.println("Leaving function: DIGIT Unsuccessful");
                 return false;
             }
         }
 
-    }
+    } // end DIGIT
 
     public static String toLower(String input) {
         /*
@@ -529,8 +532,8 @@ public class Parser {
          * Returns:           the input string converted to lowercase
         */
 
-        return input.toLowerCase();
-    }
+        return input.toLowerCase(); // returning the input string to lowercase
+    } // end toLower
 
     public static String getNextLine(Scanner inStream) {
         /*
@@ -550,9 +553,9 @@ public class Parser {
         */
 
         if (inStream.hasNextLine()) {
-            return inStream.nextLine();
+            return inStream.nextLine(); // return the next line if there is one
         } else {
             return null; // return null if there are no more lines to read
         }
-    }
-}
+    } // end getNextLine
+} // end class
