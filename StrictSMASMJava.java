@@ -34,6 +34,20 @@ public class StrictSMASMJava {
          *              DIGIT -> ‘0’ | .. | ‘9’
          *              DIGITS -> DIGIT {DIGIT}
          * 
+         *              Possibly NEW Grammar rules (not in the original assignment instructions):
+         *              START -> COMMAND
+         *              COMMAND -> LD_COMMAND | SUB_COMMAND | ST_COMMAND | SQ_COMMAND | ADD_COMMAND | RT_COMMAND
+         *              LD_COMMAND -> 'ld' '[' VALUE ',' REGISTER ']'
+         *              SUB_COMMAND -> 'sub' '[' REGISTER ',' REGISTER ']'
+         *              ST_COMMAND -> 'st' '[' REGISTER ',' REGISTER ']'
+         *              SQ_COMMAND -> 'sq' '[' REGISTER ']'
+         *              ADD_COMMAND -> 'add' '[' REGISTER ',' REGISTER ']'
+         *              RT_COMMAND -> 'rt' '[' REGISTER ']'
+         *              REGISTER -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f'
+         *              VALUE -> DIGITS
+         *              DIGITS -> DIGIT {DIGIT}
+         *              DIGIT -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+         * 
          * 
          * Variables: 
          * inStream - for reading from the input file
