@@ -34,7 +34,7 @@ public class StrictSMASMJava {
          *              DIGIT -> ‘0’ | .. | ‘9’
          *              DIGITS -> DIGIT {DIGIT}
          * 
-         *              Possibly NEW Grammar rules (not in the original assignment instructions):
+         *              Possibly NEW Grammar rules not yet implemented (not in the original assignment instructions):
          *              START -> COMMAND
          *              COMMAND -> LD_COMMAND | SUB_COMMAND | ST_COMMAND | SQ_COMMAND | ADD_COMMAND | RT_COMMAND
          *              LD_COMMAND -> 'ld' '[' VALUE ',' REGISTER ']'
