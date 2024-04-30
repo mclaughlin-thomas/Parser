@@ -1,9 +1,23 @@
 /*
- * Java Programming Assignment #2  Spring 2024 – Parser (Strictly Provided Grammar Version)
+ * Java Programming Assignment #2  Spring 2024 – Parser (Strict Provided Grammar Version)
  * Description: This program reads a file of tokens, parses the tokens based on grammar rules, and notifies the user if the program is legal or not.
+ *              The program reads from a file named "Prog4TMTokens.txt" containing tokens and the program calls multiple functions that act as the
+ *              grammar rules to validate and parse the tokens. At the end, it outputs whether the tokens in the file are legal or not based on the grammar provided below.
+ *              The program also prints to the terminal and logs to the output file throughout the process for tracking the flow of execution.
+ * 
+ *              Grammar rules (EBNF):
+ *              START -> { COMMANDS }
+ *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
+ *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
+ *              REGISTER -> ‘a’ | ‘b’ | ‘c’ | ‘d’ | ‘e’ | ‘f’
+ *              VALUE -> DIGITS
+ *              DIGIT -> ‘0’ | .. | ‘9’
+ *              DIGITS -> DIGIT {DIGIT}
+ * 
+ * Date Created: 4/26/2024
+ * Last Modified: 4/30/2024
  * CS-310 Programming Languages
  * Thomas McLaughlin
- * 04/30/2024
 */
 
 import java.io.File;  // Import the File class
@@ -21,11 +35,11 @@ public class Parser {
          * Date Created: 4/26/2024
          * Last Modified: 4/30/2024
          * Description: This method serves as the entry point of the Parser program. It initializes the file streams for reading the input token file as well as the writing output file.
-         *              This method reads from a file named "prog4TMTokens.txt" containing tokens and the program calls multiple functions that act as the grammar rules to validate and parse
+         *              This method reads from a file named "Prog4TMTokens.txt" containing tokens and the program calls multiple functions that act as the grammar rules to validate and parse
          *              the tokens. At the end, it outputs whether the tokens in the file are legal or not based on the grammar provided below. The method prints to the terminal and logs
          *              to the output file throughout the process for tracking the flow of execution.
          * 
-         *              Grammar rules:
+         *              Grammar rules (EBNF):
          *              START -> { COMMANDS }
          *              COMMANDS -> COMMAND ‘[‘ (REGISTER | VALUE )  [ ‘,’ REGISTER] ‘]’
          *              COMMAND -> ‘st’ | ‘ld’ | ‘sub’ | ‘add’ | ‘sq’  | ‘rt’ 
@@ -33,6 +47,9 @@ public class Parser {
          *              VALUE -> DIGITS
          *              DIGIT -> ‘0’ | .. | ‘9’
          *              DIGITS -> DIGIT {DIGIT}
+         * 
+         *             - No direct left recursion in the grammar rules
+         *             - Passes the pairwise disjointness test
          * 
          * 
          * Variables: 
@@ -51,13 +68,13 @@ public class Parser {
         
         Scanner inStream = null; // initialize read
         PrintWriter outStream=null; // initialize write
-        String tokenPath = "prog4TMTokens.txt"; // path to input file
-        String outputPath = "Prog4TMout.txt"; // path to output file
+        String tokenPath = "Prog4TMTokens.txt"; // path to input file of tokens
+        String outputPath = "Prog4TMout.txt"; // path to write output file
 
         //try/catch for accessing input file to account for errors
         try
         {
-            System.out.println("Checking the file " + tokenPath);
+            System.out.println("Checking the file " + tokenPath + " to see if it is a syntactically correct SMASM Language program.");
             inStream = new Scanner(new File(tokenPath));
         } // end try
         catch(FileNotFoundException e)
@@ -532,6 +549,9 @@ public class Parser {
          * Returns:           the input string converted to lowercase
         */
 
+        // No comment announcing entrance of function as it is helper method, not a grammar rule.
+        // Not entirely necessary to have a method for this, could have just used the toLowerCase() method directly in the code, but this method is here for clarity and readability.
+
         return input.toLowerCase(); // returning the input string to lowercase
     } // end toLower
 
@@ -543,7 +563,7 @@ public class Parser {
          * Last Modified: 4/30/2024
          * Description: This method simply returns the next line in the input file if there is one, otherwise it returns null. This method is used to read the next line in the input file.
          * 
-         * Variables: 
+         * Variables:
          * instream - for reading from the input file, will use it's .hasNextLine() and .nextLine() methods to read the next line
          * Arguments:
          * inStream - for reading from the input file, will use it's .hasNextLine() and .nextLine() methods to read the next line
@@ -551,6 +571,8 @@ public class Parser {
          *                    nextLine() - reads the next line in the input file
          * Returns:           the next line in the input file if there is one, otherwise it returns null
         */
+
+        //No comment announcing entrance of function as it is helper method, not a grammar rule.
 
         if (inStream.hasNextLine()) {
             return inStream.nextLine(); // return the next line if there is one
