@@ -27,7 +27,7 @@ import java.util.List; // Import the List class
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.PrintWriter; // Import the PrintWriter class to write text files
 
-public class Parser {
+public class Prog4TM {
     public static void main(String[] args) {
         /*
          * Method: public static void main(String [] args)
