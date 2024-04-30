@@ -1,9 +1,9 @@
 /*
- * Java Programming Assignment #2  Spring 2024 – Parser (Strict Provided Grammar Version)
+ * Java Programming Assignment #2  Spring 2024 – SMASM Parser (Strict Provided Grammar Version, Recursive Descent Parser)
  * Description: This program reads a file of tokens, parses the tokens based on grammar rules, and notifies the user if the program is legal or not.
  *              The program reads from a file named "Prog4TMTokens.txt" containing tokens and the program calls multiple functions that act as the
  *              grammar rules to validate and parse the tokens. At the end, it outputs whether the tokens in the file are legal or not based on the grammar provided below.
- *              The program also prints to the terminal and logs to the output file throughout the process for tracking the flow of execution.
+ *              The program also prints to the terminal and logs to the output file throughout the process for tracking the flow of execution. This is a recursive descent parser.
  * 
  *              Grammar rules (EBNF):
  *              START -> { COMMANDS }
