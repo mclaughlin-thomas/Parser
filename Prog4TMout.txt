@@ -37,22 +37,4 @@ Leaving function: REGISTER Success
 Entering function: REGISTER
 Leaving function: REGISTER Success
 Leaving function: COMMANDS Success
-Entering function: COMMANDS
-Entering function: COMMAND
-Leaving function: COMMAND Success
-Entering function: REGISTER
-Leaving function: REGISTER Success
-Leaving function: COMMANDS Success
-Entering function: COMMANDS
-Entering function: COMMAND
-Leaving function: COMMAND Success
-Entering function: REGISTER
-Leaving function: REGISTER Unsuccessful
-Entering function: VALUE
-Entering function: DIGITS
-Entering function: DIGIT
-Leaving function: DIGIT Unsuccessful
-Leaving function: DIGITS Unsuccessful
-Leaving function: VALUE Unsuccessful
-Leaving function: COMMANDS Unsuccessful
-Leaving function: START Unsuccessful
+Leaving function: START Success
