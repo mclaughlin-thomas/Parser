@@ -164,7 +164,7 @@ public class Parser {
          * instream - for reading from the input file
          * outStream - for writing to the output file
          * command - the command token read from the input file to be evaluated
-         * nextLine - the next line in the input file to be evaluated, used in try catches for the (expected) terminals : '[' , ']', and ','
+         * nextLine - the next line in the input file to be evaluated, used for the (expected) terminals : '[' , ']', and ','
          * registerValueLine - the (expected) register or value token read from the input file to be evaluated
          * Arguments:
          * instream - for reading from the input file
@@ -183,61 +183,46 @@ public class Parser {
         String command = toLower(getNextLine(inStream)); // get the next line in the input file and convert it to lowercase
 
         if (COMMAND(inStream, outStream, command)) { // if the COMMAND method returns true given the command token
-            try {
-                String nextLine = getNextLine(inStream); // get the next line in the input file
-                if (!nextLine.equals("[")) { // if the next line is not '[' return false, that is not valid
-                    System.out.println("Leaving function: COMMANDS Unsuccessful");
-                    outStream.println("Leaving function: COMMANDS Unsuccessful");
-                    return false;
-                } 
-            } catch (NullPointerException e) { // if there is no next line, return false
+            
+            String nextLine = getNextLine(inStream); // get the next line in the input file
+            if (!nextLine.equals("[")) { // if the next line is not '[' return false, that is not valid
                 System.out.println("Leaving function: COMMANDS Unsuccessful");
                 outStream.println("Leaving function: COMMANDS Unsuccessful");
                 return false;
-            }
+            } 
                 
             String registerValueLine = toLower(getNextLine(inStream)); // get the next line in the input file after the bracket and convert it to lowercase
 
             if (REGISTER(outStream, registerValueLine) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
                 
                 //optional part of the grammar
-                try {
-                    String nextLine = getNextLine(inStream);
-                    if(nextLine.equals("]")){ // check if end early before the optional portion
-                        System.out.println("Leaving function: COMMANDS Success");
-                        outStream.println("Leaving function: COMMANDS Success");
-                        return true;
-                    }
-                    else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
-                        System.out.println("Leaving function: COMMANDS Unsuccessful");
-                        outStream.println("Leaving function: COMMANDS Unsuccessful");
-                        return false;
-                    }
-                } catch (NullPointerException e) { // if there is no next line, return false
+                
+                nextLine = toLower(getNextLine(inStream));
+                if(nextLine.equals("]")){ // check if end early before the optional portion
+                    System.out.println("Leaving function: COMMANDS Success");
+                    outStream.println("Leaving function: COMMANDS Success");
+                    return true;
+                }
+                else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
+                
 
                 if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
-
-                    try {
-                        String nextLine = getNextLine(inStream);
-                        if (nextLine.equals("]")) { // if the next line is the end bracket, return true
-                            System.out.println("Leaving function: COMMANDS Success");
-                            outStream.println("Leaving function: COMMANDS Success");
-                            return true;
-                        } 
-                        else { // if the next line is not the end bracket, return false
-                            System.out.println("Leaving function: COMMANDS Unsuccessful");
-                            outStream.println("Leaving function: COMMANDS Unsuccessful");
-                            return false;
-                        }
-                    } catch (NullPointerException e) { // if there is no next line, return false
+                    nextLine = toLower(getNextLine(inStream));
+                    if (nextLine.equals("]")) { // if the next line is the end bracket, return true
+                        System.out.println("Leaving function: COMMANDS Success");
+                        outStream.println("Leaving function: COMMANDS Success");
+                        return true;
+                    } 
+                    else { // if the next line is not the end bracket, return false
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
                     }
+                    
                 }
                 else { // if the REGISTER method returns 0 (Unsuccessful) given the registerValueLine, return false
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
@@ -247,39 +232,30 @@ public class Parser {
             }
             else if (VALUE(outStream, registerValueLine) == 2) { // if the VALUE method returns 2 (Successful) given the registerValueLine
                 //optional part of the grammar
-                try {
-                    String nextLine = getNextLine(inStream);
-                    if(nextLine.equals("]")){ // check if end early before the optional portion
-                        System.out.println("Leaving function: COMMANDS Success");
-                        outStream.println("Leaving function: COMMANDS Success");
-                        return true;
-                    }
-                    else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
-                        System.out.println("Leaving function: COMMANDS Unsuccessful");
-                        outStream.println("Leaving function: COMMANDS Unsuccessful");
-                        return false;
-                    }
-                } catch (NullPointerException e) { // if there is no next line, return false
+                
+                nextLine = getNextLine(inStream);
+                if(nextLine.equals("]")){ // check if end early before the optional portion
+                    System.out.println("Leaving function: COMMANDS Success");
+                    outStream.println("Leaving function: COMMANDS Success");
+                    return true;
+                }
+                else if( !nextLine.equals(",")){ // any other character than ',' at this point is invalid | initiating the optional portion
                     System.out.println("Leaving function: COMMANDS Unsuccessful");
                     outStream.println("Leaving function: COMMANDS Unsuccessful");
                     return false;
                 }
+                
 
                 if( REGISTER(outStream, toLower(getNextLine(inStream))) == 1) { // if the REGISTER method returns 1 (Successful) given the registerValueLine
 
-                    try {
-                        String nextLine = getNextLine(inStream);
-                        if (nextLine.equals("]")) { // if the next line is the end bracket, return true
-                            System.out.println("Leaving function: COMMANDS Success");
-                            outStream.println("Leaving function: COMMANDS Success");
-                            return true;
-                        } 
-                        else { // if the next line is not the end bracket, return false
-                            System.out.println("Leaving function: COMMANDS Unsuccessful");
-                            outStream.println("Leaving function: COMMANDS Unsuccessful");
-                            return false;
-                        }
-                    } catch (NullPointerException e) { // if there is no next line, return false
+                    
+                    nextLine = getNextLine(inStream);
+                    if (nextLine.equals("]")) { // if the next line is the end bracket, return true
+                        System.out.println("Leaving function: COMMANDS Success");
+                        outStream.println("Leaving function: COMMANDS Success");
+                        return true;
+                    } 
+                    else { // if the next line is not the end bracket, return false
                         System.out.println("Leaving function: COMMANDS Unsuccessful");
                         outStream.println("Leaving function: COMMANDS Unsuccessful");
                         return false;
